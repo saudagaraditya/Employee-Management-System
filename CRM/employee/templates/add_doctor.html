@@ -1,0 +1,157 @@
+{% include 'header.html' %}
+{% block content %}
+
+<style>
+    /* Add your custom CSS styles here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f24b;
+      margin: 0;
+      padding: 0;
+    }
+  
+    .form-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 150px;
+      background-color: #e4e4e6e2;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+  
+    .form-group {
+      margin-bottom: 15px;
+    }
+  
+    label {
+      display: block;
+      font-weight: bold;
+    }
+  
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #fffdfd;
+      border-radius: 5px;
+    }
+  
+    button {
+      padding: 10px 20px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      justify-content: center;
+      text-align: center;
+      font-size: 16px;
+      background-color: hsla(0, 0%, 43%, 0.805);
+      color: #e8e6e6;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    button:hover {
+      background-color: black;
+      color: white;
+    }
+  
+    .message-container {
+      position: relative; /* Add position relative to the container */
+      background-color: hsla(150, 1%, 61%, 0.987);
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+  
+    .message {
+      font-weight: bold;
+      font-style: italic;
+    }
+  
+    .form-submitted {
+      background-color: #d2f2ea31;
+    }
+  
+    .page-green {
+      background-color: #b8e994;
+    }
+    .form-title {
+              text-align: center;
+              font-size: 24px;
+              margin-bottom: 20px;
+    }
+    .alert {
+              padding: 20px;
+              background-color: #f44336; /* Red */
+              color: white;
+              margin-bottom: 15px;
+    }
+  
+    /* Close button style */
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+  
+</style>
+
+<div class="form-container {% if form_submitted %}form-submitted{% endif %}">
+  {% if messages %}
+    <div class="message-container">
+      <span class="close-button" onclick="closeMessage()">X</span> <!-- Close button -->
+      {% for message in messages %}
+        <div class="message">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <h2 class="form-title">Add Doctor</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="{{ form.name.id_for_label }}">Doctor Name:</label>
+      {{ form.name }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.specialisation.id_for_label }}">Specialisation:</label>
+      {{ form.specialisation }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.contact.id_for_label }}">Contact:</label>
+      {{ form.contact }}
+      {% if form.errors %}
+        <ul>
+          {% for field in form %}
+            {% for error in field.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.location.id_for_label }}">Location:</label>
+      {{ form.location }}
+    </div>
+    <div class="form-group">
+      <label for="{{ form.entered_by.id_for_label }}">Entered By:</label>
+      {{ form.entered_by }}
+    </div>
+    <button type="submit" class="btn btn-primary">Add Doctor</button>
+  </form>
+</div>
+
+<script>
+  function closeMessage() {
+    const messageContainer = document.querySelector(".message-container");
+    messageContainer.style.display = "none";
+  }
+</script>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% include 'header.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    
+    body {
+      background-color: #f2f2f2;
+    }
+
+    .form-container {
+      width: 140%;
+      max-width: 1400px;
+      padding: 100px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      margin: auto;
+    }
+
+    .product-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .product-table th,
+    .product-table td {
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .product-image {
+      max-width: 100px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="form-container">
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Sr No.</th>
+          <th>Product Name</th>
+          <th>Company Name</th>
+          <th>Product Image</th>
+          <th>Product Price</th>
+          <th>Entered By</th>
+          <th>Actions</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.company_name }}</td>
+          <td><img src="{{ product.image.url }}" alt="Product Image" class="product-image"></td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.entered_by }}</td>
+          <td><a href="{% url 'edit_product' product.id %}" class="btn btn-primary">Edit</a></td>
+          <td><a href="{% url 'delete_product' product.id %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+{% endblock %}

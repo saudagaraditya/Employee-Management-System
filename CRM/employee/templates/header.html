@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Coding by CodingNepal | www.codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Employee login </title>
+    <link rel="stylesheet" href="{% static 'base/dashboard.css' %}">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class='bx bxl-c-plus-plus'></i>
+      <span class="logo_name">Employee</span>
+    </div>
+      <ul class="nav-links">
+        <li>
+          <a href="{% url 'dashboard' %}" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'add_product' %}">
+            <i class='bx bx-box' ></i>
+            <span class="links_name">Add product</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'view_product_page' %}">
+            <i class='bx bx-list-ul' ></i>
+            <span class="links_name">View All Products</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'add_doctor' %}">
+            <i class='bx bx-plus-medical'></i>
+            <span class="links_name">Add Doctor</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'schedule_appointment' %}">
+            <i class='bx bxs-calendar'></i>
+            <span class="links_name">Schedule Appointment</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'today_schedule' %}">
+            <i class='bx bx-table'></i>
+            <span class="links_name">Todays Schedule</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'deals_detail' %}">
+            <i class='bx bx-calendar-check'></i>
+            <span class="links_name">Deals Details</span>
+          </a>
+        </li>
+        <li class="log_out">
+          <a href="{% url 'logout' %}">
+            <i class='bx bx-log-out'></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+      <div>
+        <h2>Welcome! {{employee.first_name}}</h2>
+      </div>
+      
+    </nav>
+
+  </section>
+  {% block content %}
+
+  
+
+  {% endblock %}
+
+  
+
+ 
+
+  <script>
+    let sidebar = document.querySelector(".sidebar");
+ let sidebarBtn = document.querySelector(".sidebarBtn");
+ sidebarBtn.onclick = function() {
+   sidebar.classList.toggle("active");
+   if(sidebar.classList.contains("active")){
+   sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+ }else
+   sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+ }
+  </script>
+
+</body>
+</html>
